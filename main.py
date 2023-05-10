@@ -28,6 +28,9 @@ banbe = pyautogui.screenshot("count.png",region=(418,104, 160, 60))
 
 
 while i != count:
+    print(type(i))
+    print(type(count))
+    print(i==count)
     pyautogui.moveTo(100,100)
     locations = list(pyautogui.locateAllOnScreen('button.png'))
     print(locations)
@@ -50,6 +53,9 @@ while i != count:
         # pyautogui.screenshot(f'images/{i}.png',region=(785,207, 350, 630))
         # pyautogui.press('esc')
         i+=1
+        if count == i:
+            i = count
+            break
     
     pyautogui.moveTo(800,119)
     pyautogui.scroll(-700)
