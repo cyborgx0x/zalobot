@@ -16,15 +16,27 @@ folder = f"images"
 os.makedirs(folder, exist_ok=True)
 import re
 i = 0
+  
+time.sleep(2)
+banbe = pyautogui.screenshot("count.png", region=(418,104, 160, 60))
+f = {'file': open("count.png","rb")}
+res = requests.post("https://detection.diopthe20.com/detect/", files=f)
+print(res.text)
+r = re.findall(r'\d+', res.text)
+count  = int(r[0])
+banbe = pyautogui.screenshot("count.png",region=(418,104, 160, 60))
 
-def auto_get(i, count, status):
+
+while i != count:
     pyautogui.moveTo(100,100)
     locations = list(pyautogui.locateAllOnScreen('button.png'))
     print(locations)
     locations.pop(-1)
     locations.pop(-2)
+    
     for location in locations:
         locationxy = pyautogui.center(location)
+        
         # if locationxy.y > 920:
         #     break
         # pyautogui.click(*locationxy)
@@ -38,22 +50,6 @@ def auto_get(i, count, status):
         # pyautogui.screenshot(f'images/{i}.png',region=(785,207, 350, 630))
         # pyautogui.press('esc')
         i+=1
-        if i == count:
-            status = False
-            break
-    return i
-time.sleep(2)
-banbe = pyautogui.screenshot("count.png", region=(418,104, 160, 60))
-f = {'file': open("count.png","rb")}
-res = requests.post("https://detection.diopthe20.com/detect/", files=f)
-print(res.text)
-r = re.findall(r'\d+', res.text)
-count  = int(r[0])
-banbe = pyautogui.screenshot("count.png",region=(418,104, 160, 60))
-
-import math
-status = True 
-while status:
-    i = auto_get(i, count, status)
+    
     pyautogui.moveTo(800,119)
     pyautogui.scroll(-700)
