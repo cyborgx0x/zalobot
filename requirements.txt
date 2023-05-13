@@ -1,4 +1,4 @@
 pillow
 requests
-transformers
 pyautogui
+jinja2
